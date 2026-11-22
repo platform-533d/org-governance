@@ -7,6 +7,7 @@ Management account (`793239448877`) in `ap-southeast-2`.
 |---|---|
 | `identity-readonly.tf` | `533d-readonly` user, `ReadOnlyInvestigators` group and `ReadOnlyInvestigation` permission set, assigned to every active account |
 | `security-notifications.tf` | `platform@533d.consulting` email subscriptions to Control Tower's `aws-controltower-AggregateSecurityNotifications` in the Audit account (Sydney and Melbourne), via `AWSControlTowerExecution` |
+| `ai-opt-out.tf` | `ai-services-opt-out` AI services opt-out policy on the organization root (policy type enabled by `bootstrap/enable-policy-types.sh`) |
 
 State: `s3://account-vending-tfstate-793239448877/org-governance/terraform.tfstate`
 (bucket created by `account-vending/bootstrap/create-state-bucket.sh`).
@@ -15,6 +16,7 @@ State: `s3://account-vending-tfstate-793239448877/org-governance/terraform.tfsta
 
 ```bash
 aws sso login --sso-session 533d-admin   # as 533dSSOAdmin
+AWS_PROFILE=aft-root ./bootstrap/enable-policy-types.sh  # first time only
 AWS_PROFILE=aft-root terraform init
 AWS_PROFILE=aft-root terraform plan
 ```
